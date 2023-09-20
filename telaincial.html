@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Gerenciamento</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Inclua o link para o ícone Font Awesome (caso esteja usando) -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-oUGGV7dD2hiDs5CqKDoP5CZ2PGp8Onk5g1NpZT1Fa/0hrjD4w5a8U5ql88vCT4qsD" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+</head>
+<body>
+    <!-- Cabeçalho -->
+    <header class="header">
+        <a href="login.html">
+            <img src="../PDS/IMAGEM/logo.png" alt="Logo da SG C" class="logo">
+          </a>          
+        <div class="login-button">
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Olá, usuário
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">Sair</a></li>
+                </ul>
+              </div>
+        </div>
+    </header>
+
+    <!-- Menu Lateral -->
+    <nav class="sidebar">
+        <ul class="list-group">
+            <li class="teste"><a href="telainicial.html">Início</a></li>
+        </ul>
+        <ul>
+            <li><a href="../PDS/RH/index.html">RH</a>
+                <ul>
+                    <li><a href="../PDS/RH/funcionario.html">Funcionário</a></li>
+                    <li><a href="../PDS/RH/dadosbancarios.html">Dados Bancários</a></li>
+                    <li><a href="../PDS/RH/contracheque.html">Contra-cheque</a></li>
+                </ul>
+            </li>
+            <li><a href="../PDS/ESTOQUE/index.html">Estoque</a>
+                <ul>
+                    <li><a href="../PDS/ESTOQUE/fornecedor.html">Fornecedor</a></li>
+                    <li><a href="../PDS/ESTOQUE/produto.html">Produto</a></li>
+                    <li><a href="../PDS/ESTOQUE/categoria.html">Categorias</a></li>
+                </ul>
+            </li>
+            <li><a href="../PDS/FINANCEIRO/index.html">Financeiro</a>
+                <ul class="list-group">
+                    <li><a href="../PDS/FINANCEIRO/lancamento.html">Lançamentos</a></li>
+                    <li><a href="../PDS/FINANCEIRO/notasfiscal.html">Notas Fiscais</a></li>
+                    <li><a href="../PDS/FINANCEIRO/caixa.html">Caixas</a></li>
+                </ul>
+            </li>
+            <li><a href="../PDS/VENDAS/index.html">Vendas</a>
+                <ul>
+                    <li><a href="../PDS/VENDAS/cliente.html">Clientes</a></li>
+                    <li><a href="../PDS/VENDAS/pedidos.html">Pedidos</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+    <!-- Conteúdo da tela inicial -->
+    <main class="content">
+        <!-- Adicione outros elementos de conteúdo conforme necessário -->
+        <div class="card-group gap-4">
+            <div class="card text-bg-primary mb-3" style="max-width: 18rem;">
+                <div class="card-header">Total de Vendas Hoje</div>
+                <div class="card-body">
+                  <h5 class="card-title">Quantidade</h5>
+                  <p class="card-text">50</p>
+                  <button id="create-button" onclick="window.location.href='login.html'">Alterar</button>
+            </div>  
+            </div>
+            <div class="card text-bg-success mb-3" style="max-width: 18rem;">
+                <div class="card-header">A Receber hoje</div>
+                <div class="card-body">
+                  <h5 class="card-title">R$ 397,10</h5>
+                  <p class="card-text">Restante do mês: R$ 17.11,78</p>
+                  <button id="create-button" onclick="window.location.href='login.html'">Novo Recebimento</button><button id="create-button" onclick="window.location.href='login.html'">Ver todos</button>
+            </div>  
+            </div>
+            <div class="card text-bg-danger mb-3" style="max-width: 18rem;">
+                <div class="card-header">A Pagar Hoje</div>
+                <div class="card-body">
+                  <h5 class="card-title">R$ 5.607,52</h5>
+                  <p class="card-text">Restante do mês: R$ 156.607,62</p>
+                  <button id="create-button" onclick="window.location.href='login.html'">Novo Pagamento</button><button id="create-button" onclick="window.location.href='login.html'">Ver todos</button>
+            </div>  
+            </div>
+        </div>
+    </main>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>Gráfico de Vendas do Mês</h3>
+                <canvas id="salesChart"></canvas>
+            </div>
+            <div class="col-md-4">
+                <h3>Gráfico de Situação do Estoque</h3>
+                <canvas id="stockChart"></canvas>
+            </div>
+            <div class="col-md-4">
+                <h3>Gráfico de Pagamentos</h3>
+                <canvas id="paymentsChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Dados de exemplo para os gráficos
+        var salesData = {
+            labels: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun"],
+            datasets: [{
+                label: "Vendas",
+                data: [1200, 1500, 1800, 1400, 2000, 2500],
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        };
+
+        var stockData = {
+            labels: ["Produto A", "Produto B", "Produto C", "Produto D", "Produto E"],
+            datasets: [{
+                label: "Quantidade em Estoque",
+                data: [100, 80, 120, 90, 110],
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                borderColor: 'rgba(255, 99, 132, 1)',
+                borderWidth: 1
+            }]
+        };
+
+        var paymentsData = {
+            labels: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio"],
+            datasets: [{
+                label: "Pagamentos",
+                data: [800, 1000, 750, 1200, 900],
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        };
+
+        // Crie os gráficos
+        var salesChart = new Chart(document.getElementById('salesChart'), {
+            type: 'bar',
+            data: salesData
+        });
+
+        var stockChart = new Chart(document.getElementById('stockChart'), {
+            type: 'bar',
+            data: stockData
+        });
+
+        var paymentsChart = new Chart(document.getElementById('paymentsChart'), {
+            type: 'line',
+            data: paymentsData
+        });
+    </script>
+
+    <!-- Rodapé -->
+    <footer class="footer">
+        <p>&copy; 2023 SG Connect. Todos os direitos reservados.</p>
+    </footer>
+    
+</body>
+</html>
